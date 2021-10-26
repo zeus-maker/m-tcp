@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: tcp-client
+server:
+  port: 7020
+netty:
+  tcp:
+    ip: 0.0.0.0
+    port: 6000
