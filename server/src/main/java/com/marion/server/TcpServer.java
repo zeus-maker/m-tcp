@@ -88,6 +88,7 @@ public class TcpServer implements ApplicationRunner, ApplicationListener<Context
                 }
             });
 
+
             Channel channel = serverBootstrap.bind().sync().channel();
 
             log.info("[TcpBootRunner] application server start ....");
