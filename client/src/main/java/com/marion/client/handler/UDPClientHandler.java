@@ -1,13 +1,14 @@
 package com.marion.client.handler;
 
 
-import com.marion.client.protocol.TcpProtocol;
-import com.marion.client.utils.JsonUtils;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.socket.DatagramPacket;
+import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
 
 /**
  * @author Marion
@@ -16,15 +17,11 @@ import org.springframework.stereotype.Component;
 @ChannelHandler.Sharable
 @Component
 @Slf4j
-public class TcpClientHandler extends SimpleChannelInboundHandler<String> {
+public class UDPClientHandler extends SimpleChannelInboundHandler<DatagramPacket> {
 
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, String s) throws Exception {
-        log.info("[channelRead0] " + s);
-        TcpProtocol tcpProtocol = JsonUtils.fromString(s, TcpProtocol.class);
-        if (null != tcpProtocol) {
-            log.info(s);
-        }
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, DatagramPacket packet) throws Exception {
+        log.info("[channelRead0] " + packet.content().toString(CharsetUtil.UTF_8));
     }
 
     /**
